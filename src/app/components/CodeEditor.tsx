@@ -7,6 +7,7 @@ import Output from "./Output";
 
 const CodeEditor = () => {
   const [value, setValue] = useState<string>("");
+  
 
   const handleChange = (newValue: string | undefined) => {
     if (newValue !== undefined) {
@@ -52,7 +53,7 @@ const CodeEditor = () => {
             onChange={handleChange}
           />
         </Box>
-        <Output editorRefProps={editorRef.current} />
+        <Output editorRef={editorRef}  />
       </HStack>
     </Box>
   );
