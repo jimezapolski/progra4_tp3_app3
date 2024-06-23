@@ -1,6 +1,7 @@
+// src/components/Output.tsx
 import { useState } from "react";
 import { Box, Button, Text, useToast } from "@chakra-ui/react";
-import { executeCode } from "../utils";
+import { executeCode, VerCodigoRespuesta } from "../utils";
 
 interface OutputProps {
   editorRef: React.RefObject<any>;
@@ -8,23 +9,25 @@ interface OutputProps {
 
 const Output = ({ editorRef }: OutputProps) => {
   const toast = useToast();
-  const [output, setOutput] = useState<string[] | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isError, setIsError] = useState<boolean>(false);
+  const [output, setOutput] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const runCode = async () => {
-    const sourceCode = editorRef.current.getValue();
+    const sourceCode = editorRef.current?.getValue();
     if (!sourceCode) return;
     try {
       setIsLoading(true);
-      const result = await executeCode({ codigo: sourceCode });
-      setOutput(result.output.split("\n"));
+      console.log(sourceCode);
+      const result: VerCodigoRespuesta = await executeCode({ codigo: sourceCode });
+      console.log("API:", result);
+      setOutput(result.resultado);
       result.stderr ? setIsError(true) : setIsError(false);
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
       toast({
         title: "An error occurred.",
-        description: (error as Error).message || "Unable to run code",
+        description: error.message || "Unable to run code",
         status: "error",
         duration: 6000,
         isClosable: true,
@@ -55,10 +58,9 @@ const Output = ({ editorRef }: OutputProps) => {
         border="1px solid"
         borderRadius={4}
         borderColor={isError ? "red.500" : "#333"}
-        overflowY="scroll"
       >
         {output
-          ? output.map((line, i) => <Text key={i}>{line}</Text>)
+          ? output.split("\n").map((line, i) => <Text key={i}>{line}</Text>)
           : 'Click "Run Code" to see the output here'}
       </Box>
     </Box>
