@@ -64,16 +64,17 @@ const CodeEditor = () => {
     <Box>
       <HStack spacing={4}>
         <Box w="50%">
-          <Text mb={2} fontSize="lg">
+          {/* <Text mb={2} fontSize="lg">
             Langueage
-          </Text>
-              {/* ListBox que muestra las versiones de código y llama a handleSelectVersion al seleccionar una */}
-          <ListBox versions={versions} onSelect={handleSelectVersion} />
-          <Button variant="outline" colorScheme="blue" mb={4}>
+          </Text> */}
+          <Button variant="outline" colorScheme="blue" mb={6} mr={4}>
             JavaScript
           </Button>
+              {/* ListBox que muestra las versiones de código y llama a handleSelectVersion al seleccionar una */}
+          <ListBox  versions={versions} onSelect={handleSelectVersion} />
+          
           <Editor
-            height="75vh"
+            height="70vh"
             theme="vs-dark"
             defaultLanguage="javascript"
             defaultValue="// some comment"
@@ -81,9 +82,10 @@ const CodeEditor = () => {
             value={value}
             onChange={handleChange}
           />
+                    {/* Botón para guardar los cambios */}
+        <Button mt={3} onClick={handleSave}>Guardar cambios</Button>
+
         </Box>
-          {/* Botón para guardar los cambios */}
-        <button onClick={handleSave}>Guardar cambios</button>
         <Output editorRef={editorRef}  />
       </HStack>
     </Box>
