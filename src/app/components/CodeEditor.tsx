@@ -8,6 +8,7 @@ import { VersionDeCodigo, VersionesDeCodigo } from "../Modelo";
 import ListBox from './ListBox';
 import Output from "./Output";
 
+
 const CodeEditor = () => {
   const [value, setValue] = useState<string>(""); //codigo actual
   const [versions, setVersions] = useState<VersionDeCodigo[]>([]); // Estado para las versiones
@@ -38,7 +39,7 @@ const CodeEditor = () => {
   const handleSave = async () => {
     try {
       const message = await saveCode(value);
-      alert(message); // Mostrar el mensaje de éxito del servidor
+      alert("Guardadado con exito"); // Mostrar el mensaje de éxito del servidor
 
       // Actualizar las versiones después de guardar
       const data = await getCodeVersions();
@@ -49,7 +50,7 @@ const CodeEditor = () => {
     }
   };
 
-    const handleSelectVersion = (codigo) => {
+    const handleSelectVersion = (codigo:string) => {
       setValue(codigo); // Establece el código seleccionado en el estado
     };
 
