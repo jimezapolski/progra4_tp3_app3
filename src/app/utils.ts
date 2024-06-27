@@ -80,3 +80,34 @@ export async function saveCode(codigo: string): Promise<void> {
     }
   }
 }
+
+// Actualizar el código en una versión específica con POST
+export interface UpdateCodeParams {
+  fecha: Date;
+  codigo: string;
+}
+
+export async function updateCode(params: UpdateCodeParams): Promise<void> {
+  const urlCompleta = `${process.env.NEXT_PUBLIC_URL_API}/api/actualizar-codigo`;
+
+  try {
+    const response = await fetch(urlCompleta, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(params)
+    });
+
+    if (!response.ok) {
+      const body = await response.text();
+      throw new Error(`Error actualizando el código: ${body}`);
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Fetch error: ${error.message}`);
+    } else {
+      throw new Error('Unknown fetch error');
+    }
+  }
+}
