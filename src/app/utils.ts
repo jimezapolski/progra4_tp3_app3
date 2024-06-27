@@ -52,7 +52,6 @@ export async function executeCode(params: VerCodigoParams): Promise<VerCodigoRes
 export async function getCodeVersions(): Promise<VersionesDeCodigo> {
   //const urlCompleta = `${process.env.NEXT_PUBLIC_URL_API}/api/consultarVersionesDeCodigo`;
   return api<VersionesDeCodigo>('/api/versiones');
-
 }
 
   // Guardar el código con POST
