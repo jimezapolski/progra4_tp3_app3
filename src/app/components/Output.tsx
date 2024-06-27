@@ -54,10 +54,8 @@ const Output = ({ editorRef }: OutputProps) => {
       <Box
         height="75vh"
         p={2}
-        color={isError ? "red.400" : ""}
         border="1px solid"
         borderRadius={4}
-        borderColor={isError ? "red.500" : "#333"}
       >
         {output
           ? output.split("\n").map((line, i) => <Text key={i}>{line}</Text>)

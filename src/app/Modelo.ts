@@ -2,6 +2,7 @@
 export interface VersionDeCodigo {
   codigo: string;
   fecha: Date;
+  id: number;
 }
 
 export interface VersionesDeCodigo {

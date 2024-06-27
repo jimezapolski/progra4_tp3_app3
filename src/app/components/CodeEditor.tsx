@@ -50,7 +50,7 @@ const CodeEditor = () => {
   // Función que guarda el código en la API
   const handleSave = async () => {
     try {
-      const message = await saveCode(value);
+       await saveCode(value);
       toast({
         title: "Guardado con éxito",
         status: "success",
@@ -89,7 +89,8 @@ const CodeEditor = () => {
   const handleUpdate = async () => {
     if (selectedVersion) {
       try {
-        await updateCode({ fecha: selectedVersion.fecha, codigo: value });
+        console.log('la version seleccionada tiene:', selectedVersion);
+        await updateCode({ id: selectedVersion.id, codigo: value });
         toast({
           title: "Código actualizado con éxito",
           status: "success",
@@ -131,7 +132,6 @@ const CodeEditor = () => {
             <Button variant="outline" colorScheme="blue" mb={6} mr={4}>
               JavaScript
             </Button>
-            {/* ListBox que muestra las versiones de código y llama a handleSelectVersion al seleccionar una */}
             <ListBox versions={versions} onSelect={handleSelectVersion} />
   
             <Editor
@@ -143,9 +143,7 @@ const CodeEditor = () => {
               value={value}
               onChange={handleChange}
             />
-            {/* Botón para guardar los cambios */}
             <Button mt={3} onClick={handleSave}>Guardar cambios</Button>
-            {/* Botón para actualizar los cambios */}
             <Button mt={3} ml={3} onClick={handleUpdate} isDisabled={!isUpdateButtonEnabled}>Actualizar código</Button>
           </Box>
         <Output editorRef={editorRef} />

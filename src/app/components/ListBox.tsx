@@ -18,7 +18,7 @@ const ListBox: React.FC<ListBoxProps> = ({ versions, onSelect }) => {
     <select onChange={handleChange}> {/* Llama a handleChange cuando se selecciona una versión */}
       <option value="" disabled selected>Selecciona una versión</option>
       {versions.map((version, index) => (
-        <option key={index} value={version.codigo}>
+        <option key={version.id} value={version.codigo}>
           {`Versión ${index + 1} - ${new Date(version.fecha).toLocaleString()}`}
         </option>
       ))}
